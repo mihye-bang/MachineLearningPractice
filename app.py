@@ -10,12 +10,14 @@ def linear_regression():  # Linear Regression predicting weight based on height
     df = pd.read_csv("heights.csv")
     # returns the first five rows
     df.head()
+    # Features: input variables describing data
     x = df["height"]
+    # Labels: variable we are predicting
     y = df["weight"]
     linear_fitter = LinearRegression()
-    # use .values to only pass values without headers
-    # reason for reshape(-1,1): x should be in 2-dimentional array like [[x1], [x2], [x3], ... [xn]] for potential Multiple Linear Regression
-    # fit : passing two variables (input, output) to train linear regression model
+    # .fit : passing two parameters/ variables (input, output) to train the linear regression model
+    # When passing the x value, use '.values'. Otherwise it will also pass the headers too and give warnings
+    # reason for reshape(-1,1): x should be in a 2-dimentional array like [[x1], [x2], [x3], ... [xn]] for potential Multiple Linear Regression
     linear_fitter.fit(x.values.reshape(-1, 1), y)
 
     # 'o' means a round marker (ro : red marker, b-- : blue dashes, s: square, ^ : triangle)
@@ -43,7 +45,7 @@ def multiple_linear_regression():
             'has_washer_dryer', 'has_doorman', 'has_elevator', 'has_dishwasher', 'has_patio', 'has_gym']]
     y = df[['rent']]
 
-    # Segregate training set and test set using train_set_split method with ration of 8:2
+    # Segregate training set and test set using train_set_split method with ratio of 8:2
     x_train, x_test, y_train, y_test = train_test_split(
         x, y, train_size=0.8, test_size=0.2)
 
@@ -58,7 +60,7 @@ def multiple_linear_regression():
     # Print and see the expected values
     print("Predicted rent value(y) with input example: ", my_predict)
 
-    # Save the predicted y values with the x_test values
+    # Save the predicted y values with the x_test's values
     y_predict = mlr.predict(x_test.values)
     # Compare the actual y value with the prediction using Scatter. If they match, it will be a line. alpha : transparency for the dots (only for visual effects)
     plt.scatter(y_test, y_predict, alpha=0.4)
@@ -72,7 +74,7 @@ def multiple_linear_regression():
     # Print intercept (b)
     print("intercept (b): ", mlr.intercept_)
 
-    # Investigate the relation (between rent and siqe_sqft, building_age_yrs ... one by one)
+    # Investigate the relations (between rent and siqe_sqft, building_age_yrs ... one by one)
     plt.scatter(df[['size_sqft']], df[['rent']], alpha=0.4)
     plt.title("RELATION BETWEEN THE RENT AND THE SIZE")
     plt.xlabel("Size")
@@ -85,7 +87,7 @@ def multiple_linear_regression():
     plt.ylabel("Predicted Rent")
     plt.show()
 
-    # .score : to analyze the accuracy of the model. The closer it is to 1, the more accurate. 0.7 is normally considered to be okay
+    # .score : to analyze the accuracy of the model. The closer to 1, the more accurate. 0.7 is normally considered to be good
     print(mlr.score(x_train, y_train))
 
 
