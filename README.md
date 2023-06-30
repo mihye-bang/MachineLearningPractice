@@ -1,5 +1,6 @@
 # Machine Learning Practice
 
-- sklearn linear regression
-- multiple linear regeression
-- visualization with matplotlib
+- sklearn Linear Regression
+- Multiple Linear Regeression
+- Visualization with matplotlib
+- Normalization (Min-Max Normalization, Z-Score Normalization)
