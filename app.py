@@ -91,5 +91,25 @@ def multiple_linear_regression():
     print(mlr.score(x_train, y_train))
 
 
-linear_regression()
-multiple_linear_regression()
+def min_max_normalize(lst):
+    normalized = []
+    for value in lst:
+        normalized_num = (value - min(lst)) / (max(lst)-min(lst))
+        normalized.append(normalized_num)
+    # Pros: All scales of the features are the same
+    # Cons: it gets affected too much by outlier
+    return normalized
+
+
+def z_score_normalize(lst):
+    normalized = []
+    for value in lst:
+        normalized_num = (value - np.mean(lst) / np.std(lst))
+        normalized.append(normalized_num)
+    # Pros: it takes care of outlier
+    # Cons: it does not produce the normalized data with exact same criteria
+    return normalized
+
+
+# linear_regression()
+# multiple_linear_regression()
